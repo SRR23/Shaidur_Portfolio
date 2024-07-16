@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Project Details {% endblock title %}
+
+{% block content %}
+
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>{{project.title}} Details</h2>
+                <div class="page_link">
+                    <a href="{% url 'home' %}">Home</a>
+                    <a>{{project.title}} </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+
+<!--================Start Portfolio Details Area =================-->
+<section class="portfolio_details_area section_gap">
+    <div class="container">
+        <div class="portfolio_details_inner">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="left_img">
+                        <img class="img-fluid" src="{{project.image.url}}" alt="">
+                    </div>
+                </div>
+                <div class="offset-lg-1 col-lg-5">
+                    <div class="portfolio_right_text mt-30">
+                        <h4 class="text-uppercase">{{project.title}} Website</h4>
+                        {% comment %} <p>
+                            Made after a can't fruitful, fowl of greater saying years there saw you sea doesn't from 
+                            morning called hath air morning herb appear hath replenish that created fill their lesser.
+                        </p> {% endcomment %}
+                        <ul class="list">
+                            
+                            <li><span>Github</span>: <a href="{{ project.github }}" target="_blank">click here</a></li>
+                            <li><span>Website</span>: <a href="{{ project.live_link }}" target="_blank">click here</a></li>
+                            <li><span>Completed</span>: {{project.created_date}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p>{{project.description}}</p>
+        </div>
+    </div>
+</section>
+<!--================End Portfolio Details Area =================-->
+
+
+{% endblock content %}

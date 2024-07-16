@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Home {% endblock title %}
+
+{% block content %}
+
+<!--================ Start Home Banner Area =================-->
+<section class="home_banner_area">
+    <div class="banner_inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="banner_content">
+                        <h3 class="text-uppercase">Hell0</h3>
+                        {% for bio in biodata %}
+                        <h1 class="text-uppercase">I am {{bio.name}}</h1>
+                        <h5 class="text-uppercase">{{bio.profession}}</h5>
+                        {% endfor %}
+                        <div class="d-flex align-items-center">
+                            <a class="primary_btn" href="{% url 'contact' %}"><span>Hire Me</span></a>
+                            {% for cv in featured_cv %}
+                            <a class="primary_btn tr-bg" href="{% url 'download_resume' cv.pk %}"><span>Get Resume</span></a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="home_right_img">
+                        {% for bio in biodata %}
+                        <img class="author_img rounded-circle" src="{{bio.image.url}}" alt="">
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Home Banner Area =================-->
+
+<!--================ Start About Us Area =================-->
+<section class="about_area section_gap">
+    <div class="container">
+        <div class="row justify-content-start align-items-center">
+            <div class="col-lg-5">
+                <div class="about_img">
+                    <img class="" src="{% static 'img/about-us.png'%}" alt="">
+                </div>
+            </div>
+
+            <div class="offset-lg-1 col-lg-5">
+                <div class="main_title text-left">
+                    <h2>let’s <br>
+                        Introduce about <br>
+                        myself</h2>
+                    {% for about in featured_about %}
+                    <p>
+                        {{about.description1}}
+                    </p>
+                    <p>
+                        {{about.description2}}
+                    </p>
+                    {% endfor %}
+
+                    {% for cv in featured_cv %}
+                    <a class="primary_btn" href="{% url 'download_resume' cv.pk %}"><span>Download Resume</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End About Us Area =================-->
+
+<!--================ Start Features Area =================-->
+<section class="features_area">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="main_title">
+                    <h2>service offers </h2>
+                    <p>
+                        As a skilled Django developer, I offer comprehensive web development services, including creating robust, scalable, and secure web applications. 
+                        My expertise encompasses the full spectrum of Django capabilities, from custom backend development and API integration to front-end enhancements and database management, ensuring a seamless and efficient user experience.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row feature_inner">
+            {% for service in featured_services %}
+            <div class="col-lg-3 col-md-6">
+                <div class="feature_item">
+                    <img src="{{service.image.url}}" alt="">
+                    <h4>{{service.title}}</h4>
+                    <p>{{service.description}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!--================ End Features Area =================-->
+
+
+<!--================Start Portfolio Area =================-->
+<section class="portfolio_area" id="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main_title text-left">
+                    <h2>quality work <br>
+                        Recently done project </h2>
+                </div>
+            </div>
+        </div>
+        <div class="filters portfolio-filter">
+            <ul>
+                <li class="active" data-filter="*">all</li>
+                {% for category in featured_categories %}
+                <li data-filter=".{{category.slug}}">{{category.title|title}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="filters-content">
+            <div class="row portfolio-grid justify-content-center">
+                {% for category in featured_categories %}
+                {% for project in category.projects.all %}
+                <div class="col-lg-4 col-md-6 all {{category.slug}}">
+                    <div class="portfolio_box">
+                        <div class="single_portfolio">
+                            <img class="img-fluid w-100" src="{{project.image.url}}" alt="">
+                            <div class="overlay"></div>
+                            <a href="{{project.image.url}}" class="img-gal">
+                                <div class="icon">
+                                    <span class="lnr lnr-cross"></span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="short_info">
+                            <h4><a href="{% url 'project_details' project.slug%}">{{project.title}}</a></h4>
+                            
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Portfolio Area =================-->
+
+
+
+{% endblock content %}
