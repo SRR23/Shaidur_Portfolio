@@ -1,5 +1,5 @@
 from django.db import models
-
+from tinymce.models import HTMLField  
 # Create your models here.
 
 class Category(models.Model):
@@ -24,7 +24,7 @@ class Project(models.Model):
     created_date = models.CharField(max_length=50)
     github = models.URLField(max_length=300, blank=True, null=True)
     live_link = models.URLField(max_length=300, blank=True, null=True)
-    description = models.TextField(max_length=1000, default='')
+    description = HTMLField()
     
     class Meta:
         ordering = ['-id']
