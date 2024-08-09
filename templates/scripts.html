@@ -14,5 +14,13 @@
 <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
 <script src="{% static 'js/mail-script.js' %}"></script>
 
+<script>
+    // Get the current year
+    var currentYear = new Date().getFullYear();
+    
+    // Set the year in the footer
+    document.getElementById('year').textContent = currentYear;
+</script>
+
 <script src="{% static 'js/gmaps.min.js' %}"></script>
 <script src="{% static 'js/theme.js' %}"></script>

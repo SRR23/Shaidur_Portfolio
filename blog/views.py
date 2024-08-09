@@ -66,13 +66,31 @@ class Category_details(generic.DetailView):
     model = Category
     template_name = 'category_details.html'
     slug_url_kwarg = 'slug'
+    paginate_by = 1
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        context['category_blogs'] = self.get_object().category_blogs.all()
+        category = self.get_object()
+        category_products = category.category_blogs.all()
+        
+        page_obj = Custom_Paginator(self.request, category_products, self.paginate_by)
+        queryset = page_obj.get_queryset()
+        
+        context['blog'] = queryset
+        context['paginator'] = page_obj.paginator
+        context['page_obj'] = queryset
+        context['is_paginated'] = queryset.has_other_pages()
         
         return context
+
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+        
+    #     context['category_blogs'] = self.get_object().category_blogs.all()
+        
+    #     return context
 
 
 
