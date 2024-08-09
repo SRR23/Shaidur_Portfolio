@@ -32,7 +32,7 @@ class Blogs(generic.ListView):
     template_name = 'blog.html'
     context_object_name = 'blogs'
     
-    paginate_by = 1
+    paginate_by = 3
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -66,7 +66,7 @@ class Category_details(generic.DetailView):
     model = Category
     template_name = 'category_details.html'
     slug_url_kwarg = 'slug'
-    paginate_by = 1
+    paginate_by = 3
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -84,13 +84,7 @@ class Category_details(generic.DetailView):
         
         return context
 
-    
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-        
-    #     context['category_blogs'] = self.get_object().category_blogs.all()
-        
-    #     return context
+
 
 
 
